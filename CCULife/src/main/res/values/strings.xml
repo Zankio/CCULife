@@ -33,13 +33,13 @@
     <string name="action_classmatelist">修課同學</string>
     <string name="pref_header_custom">自訂</string>
     <string name="title_homework">作業</string>
-    <string name="wifi_login_success">成功登入 "CCU"</string>
-    <string name="wifi_login_check_pw">登入失敗！請檢查 wifi 帳號密碼</string>
-    <string name="autologin_alert_title">注意！</string>
-    <string name="autologin_alert_message">開起此功能有可能造成安全性問題，\n請自行評估是相關風險</string>
     <string name="downloading">下載中...</string>
     <string name="download_error">下載錯誤</string>
     <string name="download_complete">下載完成</string>
     <string name="download_file">下載:</string>
     <string name="new_version">新版本</string>
+    <string name="wifi_login_success">成功登入 "CCU"</string>
+    <string name="wifi_login_check_pw">登入失敗！請檢查 wifi 帳號密碼</string>
+    <string name="autologin_alert_title">注意！</string>
+    <string name="autologin_alert_message">開起此功能有可能造成安全性問題，\n請自行評估是相關風險</string>
 </resources>
