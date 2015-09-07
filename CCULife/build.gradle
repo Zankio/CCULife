@@ -28,6 +28,7 @@ tasks.withType(JavaCompile) {
 
 dependencies {
     compile 'com.android.support:support-v4:19.+'
-    compile 'org.jsoup:jsoup:1.7.2'
+    //compile 'org.jsoup:jsoup:1.7.2'
+    compile files('./lib/jsoup.jar')
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
 }

@@ -1,19 +1,34 @@
 package org.zankio.cculife.CCUService.base.helper;
 
+import android.content.Context;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.zankio.cculife.CCUService.base.authentication.IAuth;
 import org.zankio.cculife.override.Net;
 
+import javax.net.ssl.SSLSocketFactory;
 public class ConnectionHelper {
 
     IAuth<Connection> auth;
     private final static int CONNECT_TIMEOUT = Net.CONNECT_TIMEOUT;
+    private static SSLSocketFactory sslSocketFoctory;
 
     public ConnectionHelper() { }
 
     public ConnectionHelper(IAuth<Connection> auth) {
         this.auth = auth;
+    }
+
+    public static void setSSLSocketFactory(SSLSocketFactory sslSocketFoctory) {
+        ConnectionHelper.sslSocketFoctory = sslSocketFoctory;
+    }
+
+    public static SSLSocketFactory getSSLSocketFactory() {
+        if (sslSocketFoctory == null) {
+            // Todo
+        }
+        return sslSocketFoctory;
     }
 
     public Connection create(String url) {
