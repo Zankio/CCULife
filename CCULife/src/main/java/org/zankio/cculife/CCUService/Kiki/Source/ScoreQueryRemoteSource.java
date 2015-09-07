@@ -31,11 +31,13 @@ public class ScoreQueryRemoteSource extends ScoreQuerySource{
         Document document;
         String error;
 
-        connection = Jsoup.connect("http://kiki.ccu.edu.tw/~ccmisp06/cgi-bin/Query/Query_grade.php");
+        connection = Jsoup.connect("https://kiki.ccu.edu.tw/~ccmisp06/cgi-bin/Query/Query_grade.php");
         ConnectionHelper.initTimeout(connection);
 
         connection.data("id", sessionManager.getUserName())
                 .data("password", sessionManager.getPassword());
+
+        ConnectionHelper.initSSLSocketFactory(connection, ConnectionHelper.getSSLSocketFactory());
 
         try {
             document = connection.post();

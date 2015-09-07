@@ -60,13 +60,14 @@ public class EcourseRemoteSource extends EcourseSource {
                 .data("id", user)
                 .data("pass", pass)
                 .data("ver", "C");
+        ConnectionHelper.initSSLSocketFactory(connection, ConnectionHelper.getSSLSocketFactory());
 
         try {
             connection.post();
             String url = connection.response().url().toString();
             String body = connection.response().body();
 
-            if (url.startsWith("http://ecourse.ccu.edu.tw/php/Courses_Admin/take_course.php")) {
+            if (url.startsWith("https://ecourse.ccu.edu.tw/php/Courses_Admin/take_course.php")) {
                 auth.setCookie(connection, SESSION_FIELD_NAME);
                 return true;
             } else if (url.startsWith(Url.LOGIN)) {

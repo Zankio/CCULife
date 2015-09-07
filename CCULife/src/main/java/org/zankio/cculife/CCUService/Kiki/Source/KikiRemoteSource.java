@@ -45,11 +45,12 @@ public class KikiRemoteSource extends KikiSource {
         Document document;
         Connection connection;
 
-        connection = Jsoup.connect("http://kiki.ccu.edu.tw/~ccmisp06/cgi-bin/class_new/bookmark.php");
+        connection = Jsoup.connect("https://kiki.ccu.edu.tw/~ccmisp06/cgi-bin/class_new/bookmark.php");
         ConnectionHelper.initTimeout(connection);
         connection.data("id", user)
                 .data("password", pass)
                 .data("term", "on");
+        ConnectionHelper.initSSLSocketFactory(connection, ConnectionHelper.getSSLSocketFactory());
 
         try {
             document = connection.post();
@@ -110,7 +111,7 @@ public class KikiRemoteSource extends KikiSource {
         checkAuth();
 
         Connection connection;
-        connection = Jsoup.connect("http://kiki.ccu.edu.tw/~ccmisp06/cgi-bin/class_new/Selected_View00.cgi?" +
+        connection = Jsoup.connect("https://kiki.ccu.edu.tw/~ccmisp06/cgi-bin/class_new/Selected_View00.cgi?" +
                 (year > 0 && term > 0 ? ("year=" + year + "&term=" + term) : ""));
         connectionHelper.init(connection);
 
@@ -127,7 +128,7 @@ public class KikiRemoteSource extends KikiSource {
         checkAuth();
 
         Connection connection;
-        connection = Jsoup.connect("http://kiki.ccu.edu.tw/~ccmisp06/cgi-bin/class_new/Selected_View00.cgi?"+
+        connection = Jsoup.connect("https://kiki.ccu.edu.tw/~ccmisp06/cgi-bin/class_new/Selected_View00.cgi?"+
                 (year > 0 && term > 0 ? ("year=" + year + "&term=" + term) : ""));
         connectionHelper.init(connection);
 

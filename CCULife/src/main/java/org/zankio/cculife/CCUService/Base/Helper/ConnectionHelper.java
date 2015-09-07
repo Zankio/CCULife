@@ -39,6 +39,7 @@ public class ConnectionHelper {
     public Connection init(Connection connection) {
         ConnectionHelper.initAuth(connection, auth);
         ConnectionHelper.initTimeout(connection);
+        ConnectionHelper.initSSLSocketFactory(connection, ConnectionHelper.getSSLSocketFactory());
         return connection;
     }
 
@@ -49,6 +50,11 @@ public class ConnectionHelper {
 
     public static Connection initAuth(Connection connection, IAuth<Connection> auth) {
         if(auth != null) auth.Auth(connection);
+        return connection;
+    }
+
+    public static Connection initSSLSocketFactory(Connection connection, SSLSocketFactory sslSocketFoctory) {
+        connection.request().setSSLSocketFactory(sslSocketFoctory);
         return connection;
     }
 }

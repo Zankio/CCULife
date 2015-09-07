@@ -141,6 +141,7 @@ public class Kiki {
 
             connection = Jsoup.connect(OutlineLink).timeout(Net.CONNECT_TIMEOUT);
             connection.followRedirects(false);
+            org.zankio.cculife.CCUService.base.helper.ConnectionHelper.initSSLSocketFactory(connection, org.zankio.cculife.CCUService.base.helper.ConnectionHelper.getSSLSocketFactory());
 
 
             try {
