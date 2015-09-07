@@ -101,7 +101,7 @@ public class KikiRemoteSource extends KikiSource {
         else term = 2;
 
         result = getTimeTable(year, term);
-        if (kikiLocalSource != null)
+        if (kikiLocalSource != null && result != null)
             kikiLocalSource.storeTimeTable(result);
         return result;
 
