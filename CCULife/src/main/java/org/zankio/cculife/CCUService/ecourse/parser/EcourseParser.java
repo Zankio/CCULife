@@ -195,6 +195,7 @@ public class EcourseParser extends BaseParser {
         boolean standFileTemplate = false;
 
         if (baseurl.startsWith("http://ecourse.ccu.edu.tw/php/textbook/course_menu.php")) standFileTemplate = true;
+        if (baseurl.startsWith("https://ecourse.ccu.edu.tw/php/textbook/course_menu.php")) standFileTemplate = true;
 
         files = document.select("a");
 
@@ -206,7 +207,7 @@ public class EcourseParser extends BaseParser {
 
             nodeHref = setBaseUrl(nodeHref, baseurl);
 
-            if (Pattern.matches("^http\\:\\/\\/ecourse(?:\\.elearning)\\.ccu\\.edu\\.tw\\/[^/]+\\/textbook\\/.+$", nodeHref)) {
+            if (Pattern.matches("^https?\\:\\/\\/ecourse(?:\\.elearning)?\\.ccu\\.edu\\.tw\\/[^/]+\\/textbook\\/.+$", nodeHref)) {
 
                 file = ecourse.new File();
                 file.Name = getFileName(nodeHref);
