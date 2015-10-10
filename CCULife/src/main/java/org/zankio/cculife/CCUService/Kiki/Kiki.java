@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import javax.net.ssl.HttpsURLConnection;
 
 public class Kiki {
 
@@ -47,6 +48,7 @@ public class Kiki {
         try {
             kikiRemoteSource.Authenticate(sessionManager);
         } catch (NetworkErrorException e) { }
+        HttpsURLConnection.setDefaultSSLSocketFactory(org.zankio.cculife.CCUService.base.helper.ConnectionHelper.getSSLSocketFactory());
 
         if (OFFLINE_MODE > 0) {
             kikiLocalSource = new KikiLocalSource(this, context);
@@ -141,8 +143,6 @@ public class Kiki {
 
             connection = Jsoup.connect(OutlineLink).timeout(Net.CONNECT_TIMEOUT);
             connection.followRedirects(false);
-            org.zankio.cculife.CCUService.base.helper.ConnectionHelper.initSSLSocketFactory(connection, org.zankio.cculife.CCUService.base.helper.ConnectionHelper.getSSLSocketFactory());
-
 
             try {
                 location = connection.execute().header("Location");

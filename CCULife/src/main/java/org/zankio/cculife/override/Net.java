@@ -26,6 +26,45 @@ public class Net {
         return org.jsoup.Jsoup.connect(url).timeout(CONNECT_TIMEOUT);
     }
 
+    public static SSLContext generateSSLContext(Context context) {
+        try {
+            CertificateFactory cf = CertificateFactory.getInstance("X.509");
+            InputStream caInput = new BufferedInputStream(context.getAssets().open("ssl.crt"));
+            Certificate ca;
+
+            try {
+                ca = cf.generateCertificate(caInput);
+            } finally {
+                caInput.close();
+            }
+
+            // Create a KeyStore containing our trusted CAs
+            String keyStoreType = KeyStore.getDefaultType();
+            KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+            keyStore.load(null, null);
+            keyStore.setCertificateEntry("ca", ca);
+
+            // Create a TrustManager that trusts the CAs in our KeyStore
+            String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+            TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
+            tmf.init(keyStore);
+
+            // Create an SSLContext that uses our TrustManager
+            SSLContext ssl_context = SSLContext.getInstance("TLS");
+            ssl_context.init(null, tmf.getTrustManagers(), null);
+
+;
+            return ssl_context;
+        }
+        catch (CertificateException e) {}
+        catch (KeyStoreException e) {}
+        catch (KeyManagementException e) {}
+        catch (NoSuchAlgorithmException e) {}
+        catch (IOException e) { }
+
+        return null;
+    }
+
     public static SSLSocketFactory generateSSLSocketFactory(Context context) {
         try {
             CertificateFactory cf = CertificateFactory.getInstance("X.509");

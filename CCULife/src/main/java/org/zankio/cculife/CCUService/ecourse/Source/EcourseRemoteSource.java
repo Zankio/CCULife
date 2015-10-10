@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.net.ssl.HttpsURLConnection;
 
 public class EcourseRemoteSource extends EcourseSource {
     private static final String SESSION_FIELD_NAME = "PHPSESSID";
@@ -39,6 +40,7 @@ public class EcourseRemoteSource extends EcourseSource {
         this.parser = (EcourseParser) parser;
         this.auth = new CookieAuth();
         this.connectionHelper = new ConnectionHelper(auth);
+        HttpsURLConnection.setDefaultSSLSocketFactory(ConnectionHelper.getSSLSocketFactory());
     }
 
     public void setLocalStorage(EcourseLocalSource ecourseLocalSource) {
@@ -60,7 +62,6 @@ public class EcourseRemoteSource extends EcourseSource {
                 .data("id", user)
                 .data("pass", pass)
                 .data("ver", "C");
-        ConnectionHelper.initSSLSocketFactory(connection, ConnectionHelper.getSSLSocketFactory());
 
         try {
             connection.post();

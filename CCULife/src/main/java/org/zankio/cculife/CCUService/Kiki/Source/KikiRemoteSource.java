@@ -14,6 +14,7 @@ import org.zankio.cculife.override.LoginErrorException;
 
 import java.io.IOException;
 import java.util.Calendar;
+import javax.net.ssl.HttpsURLConnection;
 
 public class KikiRemoteSource extends KikiSource {
 
@@ -29,6 +30,7 @@ public class KikiRemoteSource extends KikiSource {
         this.auth = new QueryStringAuth();
         this.parser = (KikiParser) parser;
         this.connectionHelper = new ConnectionHelper(auth);
+        HttpsURLConnection.setDefaultSSLSocketFactory(ConnectionHelper.getSSLSocketFactory());
     }
 
     public void setLocalSource(KikiLocalSource kikiLocalSource) {
@@ -50,7 +52,6 @@ public class KikiRemoteSource extends KikiSource {
         connection.data("id", user)
                 .data("password", pass)
                 .data("term", "on");
-        ConnectionHelper.initSSLSocketFactory(connection, ConnectionHelper.getSSLSocketFactory());
 
         try {
             document = connection.post();

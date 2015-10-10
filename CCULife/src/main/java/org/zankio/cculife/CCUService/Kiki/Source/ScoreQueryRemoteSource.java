@@ -11,6 +11,7 @@ import org.zankio.cculife.override.Exceptions;
 import org.zankio.cculife.override.LoginErrorException;
 
 import java.io.IOException;
+import javax.net.ssl.HttpsURLConnection;
 
 public class ScoreQueryRemoteSource extends ScoreQuerySource{
 
@@ -20,6 +21,7 @@ public class ScoreQueryRemoteSource extends ScoreQuerySource{
     public ScoreQueryRemoteSource(ScoreQueryParser parser) {
         this.parser = parser;
         this.data = null;
+        HttpsURLConnection.setDefaultSSLSocketFactory(ConnectionHelper.getSSLSocketFactory());
     }
 
     @Override
@@ -36,8 +38,6 @@ public class ScoreQueryRemoteSource extends ScoreQuerySource{
 
         connection.data("id", sessionManager.getUserName())
                 .data("password", sessionManager.getPassword());
-
-        ConnectionHelper.initSSLSocketFactory(connection, ConnectionHelper.getSSLSocketFactory());
 
         try {
             document = connection.post();
