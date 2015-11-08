@@ -23,31 +23,27 @@ public class FileOpenService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         NotificationManager mNotifyManager;
         MimeTypeMap map;
-        Bundle data;
 
-        int id;
-        String ext;
-        String type;
-        String path;
-        String filename;
 
         map = MimeTypeMap.getSingleton();
         mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        data = intent.getExtras();
-        filename = data.getString("filename");
-        path = data.getString("path");
-        id = data.getInt("id");
+        Bundle data = intent.getExtras();
+        String filename = data.getString("filename");
+        String path = data.getString("path");
+        int id = data.getInt("id");
+        String TAG = data.getString("TAG");
 
         File file = new File(path, filename);
         if (file.exists()) {
             String[] names = file.getName().split("\\.");
+            String ext;
             if (names.length > 0)
                 ext = names[names.length - 1];
             else
                 ext = MimeTypeMap.getFileExtensionFromUrl(file.getName());
 
-            type = map.getMimeTypeFromExtension(ext);
+            String type = map.getMimeTypeFromExtension(ext);
 
             if (type == null)
                 type = "*/*";
@@ -60,7 +56,7 @@ public class FileOpenService extends IntentService {
                 startActivity(intent);
             }
         }
-        mNotifyManager.cancel(id);
+        mNotifyManager.cancel(TAG, id);
 
     }
 }

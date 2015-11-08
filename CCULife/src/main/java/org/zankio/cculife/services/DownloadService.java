@@ -58,12 +58,13 @@ import java.util.logging.Logger;
 
 public class DownloadService extends IntentService {
     public enum State { Downloading, Finished, Error};
-    static ArrayList<Integer> notifyID;
+    private static String TAG = "DownloadService";
+    static ArrayList<Integer> notifyID = new ArrayList<Integer>();
     static TrustManagerFactory tmf;
     static int total = 0;
 
     public DownloadService() {
-        super("DownloadService");
+        super(TAG);
     }
 
     public void onCreate() {
@@ -89,6 +90,7 @@ public class DownloadService extends IntentService {
 
         data = new Bundle();
         data.putInt("id", id);
+        data.putString("TAG", TAG);
         data.putString("path", path);
         data.putString("filename", filename);
         data.putString("state", state);
@@ -154,12 +156,12 @@ public class DownloadService extends IntentService {
                 .setContentText(context.getResources().getString(R.string.downloading))
                 .setSmallIcon(R.drawable.sicon)
                 .setOngoing(true);
-        mNotifyManager.notify(id, builder.build());
+        mNotifyManager.notify(TAG, id, builder.build());
     }
 
     private static void notify(Context context, NotificationManager mNotifyManager, NotificationCompat.Builder builder, int id, int total, int downloaded) {
         builder.setProgress(total, downloaded, false);
-        mNotifyManager.notify(id, builder.build());
+        mNotifyManager.notify(TAG, id, builder.build());
     }
     private static void notify(Context context, NotificationManager mNotifyManager, NotificationCompat.Builder builder, int id, DownloadService.State state) {
         notify(context, mNotifyManager, builder, id, state, null);
@@ -176,7 +178,7 @@ public class DownloadService extends IntentService {
         builder.setProgress(0, 0, false);
         builder.setOngoing(false);
         if (pendingIntent != null) builder.setContentIntent(pendingIntent);
-        mNotifyManager.notify(id, builder.build());
+        mNotifyManager.notify(TAG, id, builder.build());
         notifyID.remove(Integer.valueOf(id));
     }
 
@@ -185,7 +187,7 @@ public class DownloadService extends IntentService {
         NotificationManager mNotifyManager;
         mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         for(int id: notifyID) {
-            mNotifyManager.cancel(id);
+            mNotifyManager.cancel(TAG, id);
         }
     }
 
