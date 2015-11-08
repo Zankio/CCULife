@@ -1,9 +1,9 @@
 package org.zankio.cculife.CCUService.ecourse.source;
 
+import org.zankio.cculife.CCUService.base.source.BaseSource;
 import org.zankio.cculife.CCUService.ecourse.Ecourse;
 import org.zankio.cculife.CCUService.ecourse.model.Homework;
 import org.zankio.cculife.CCUService.kiki.Kiki;
-import org.zankio.cculife.CCUService.base.source.BaseSource;
 import org.zankio.cculife.SessionManager;
 
 public abstract class EcourseSource extends BaseSource {

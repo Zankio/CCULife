@@ -4,13 +4,14 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.zankio.cculife.CCUService.base.helper.ConnectionHelper;
-import org.zankio.cculife.CCUService.kiki.parser.ScoreQueryParser;
 import org.zankio.cculife.CCUService.kiki.ScoreQuery;
+import org.zankio.cculife.CCUService.kiki.parser.ScoreQueryParser;
 import org.zankio.cculife.SessionManager;
 import org.zankio.cculife.override.Exceptions;
 import org.zankio.cculife.override.LoginErrorException;
 
 import java.io.IOException;
+
 import javax.net.ssl.HttpsURLConnection;
 
 public class ScoreQueryRemoteSource extends ScoreQuerySource{

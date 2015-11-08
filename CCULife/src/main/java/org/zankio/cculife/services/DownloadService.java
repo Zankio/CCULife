@@ -1,34 +1,26 @@
 package org.zankio.cculife.services;
 
-import org.zankio.cculife.override.Net;
-import org.zankio.cculife.R;
-
 import android.annotation.TargetApi;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Intent;
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Build;
-import android.widget.Toast;
-import android.os.Environment;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
 
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.ProgressCallback;
 
-import com.koushikdutta.ion.Ion;
-import com.koushikdutta.async.future.FutureCallback;
+import org.zankio.cculife.R;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.PrintStream;
-import java.io.FileOutputStream;
-import java.security.KeyManagementException;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -36,25 +28,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
-import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
-import javax.net.ssl.KeyManagerFactory;
-
-import java.io.File;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.concurrent.Future;
-import java.util.concurrent.ExecutionException;
-
-import javax.net.ssl.HttpsURLConnection;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DownloadService extends IntentService {
     public enum State { Downloading, Finished, Error};

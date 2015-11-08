@@ -2,11 +2,6 @@ package org.zankio.cculife.ui.Ecourse;
 
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.DownloadManager;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +12,10 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.zankio.cculife.services.DownloadService;
 import org.zankio.cculife.CCUService.ecourse.Ecourse;
 import org.zankio.cculife.R;
 import org.zankio.cculife.override.AsyncTaskWithErrorHanding;
+import org.zankio.cculife.services.DownloadService;
 import org.zankio.cculife.ui.Base.BasePage;
 
 public class CourseFilePage extends BasePage {

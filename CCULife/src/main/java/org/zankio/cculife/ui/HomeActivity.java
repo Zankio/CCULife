@@ -18,7 +18,6 @@ import com.actionbarsherlock.view.Menu;
 import org.zankio.cculife.CCUService.base.helper.ConnectionHelper;
 import org.zankio.cculife.R;
 import org.zankio.cculife.SessionManager;
-import org.zankio.cculife.services.DownloadService;
 import org.zankio.cculife.override.Net;
 import org.zankio.cculife.ui.Base.BaseActivity;
 import org.zankio.cculife.ui.CCUSchedule.CCUScheduleActivity;
@@ -47,6 +46,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_home);
         ConnectionHelper.setSSLSocketFactory(Net.generateSSLSocketFactory(this));
         ActionBar actionBar = getSupportActionBar();
@@ -68,7 +68,6 @@ public class HomeActivity extends BaseActivity {
                 }
             }
         });
-
         // new Updater(this).checkUpdate();
     }
 

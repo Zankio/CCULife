@@ -2,10 +2,9 @@ package org.zankio.cculife.CCUService.kiki.parser;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.zankio.cculife.CCUService.kiki.Kiki;
 import org.zankio.cculife.CCUService.base.parser.BaseParser;
+import org.zankio.cculife.CCUService.kiki.Kiki;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 

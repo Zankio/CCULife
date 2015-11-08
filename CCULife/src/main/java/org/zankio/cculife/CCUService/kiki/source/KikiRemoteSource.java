@@ -5,8 +5,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.zankio.cculife.CCUService.base.authentication.QueryStringAuth;
 import org.zankio.cculife.CCUService.base.helper.ConnectionHelper;
-import org.zankio.cculife.CCUService.kiki.Kiki;
 import org.zankio.cculife.CCUService.base.parser.IParser;
+import org.zankio.cculife.CCUService.kiki.Kiki;
 import org.zankio.cculife.CCUService.kiki.parser.KikiParser;
 import org.zankio.cculife.SessionManager;
 import org.zankio.cculife.override.Exceptions;
@@ -14,6 +14,7 @@ import org.zankio.cculife.override.LoginErrorException;
 
 import java.io.IOException;
 import java.util.Calendar;
+
 import javax.net.ssl.HttpsURLConnection;
 
 public class KikiRemoteSource extends KikiSource {

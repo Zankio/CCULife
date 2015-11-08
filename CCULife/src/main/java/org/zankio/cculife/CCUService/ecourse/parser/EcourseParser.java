@@ -6,7 +6,6 @@ import org.jsoup.select.Elements;
 import org.zankio.cculife.CCUService.base.parser.BaseParser;
 import org.zankio.cculife.CCUService.ecourse.Ecourse;
 import org.zankio.cculife.CCUService.ecourse.model.Homework;
-import org.zankio.cculife.override.Exceptions;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;

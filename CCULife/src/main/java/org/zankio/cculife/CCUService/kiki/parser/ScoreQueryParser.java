@@ -4,8 +4,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
-import org.zankio.cculife.CCUService.kiki.ScoreQuery;
 import org.zankio.cculife.CCUService.base.parser.BaseParser;
+import org.zankio.cculife.CCUService.kiki.ScoreQuery;
 
 public class ScoreQueryParser extends BaseParser {
 

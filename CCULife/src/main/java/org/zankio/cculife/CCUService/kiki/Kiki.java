@@ -7,14 +7,14 @@ import android.preference.PreferenceManager;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
-import org.zankio.cculife.CCUService.kiki.parser.KikiParser;
-import org.zankio.cculife.CCUService.kiki.source.KikiLocalSource;
-import org.zankio.cculife.CCUService.kiki.source.KikiRemoteSource;
-import org.zankio.cculife.CCUService.kiki.source.KikiSource;
 import org.zankio.cculife.CCUService.base.SourceSwitcher.AutoNetworkSourceSwitcher;
 import org.zankio.cculife.CCUService.base.SourceSwitcher.ISwitcher;
 import org.zankio.cculife.CCUService.base.SourceSwitcher.SingleSourceSwitcher;
 import org.zankio.cculife.CCUService.ecourse.Ecourse;
+import org.zankio.cculife.CCUService.kiki.parser.KikiParser;
+import org.zankio.cculife.CCUService.kiki.source.KikiLocalSource;
+import org.zankio.cculife.CCUService.kiki.source.KikiRemoteSource;
+import org.zankio.cculife.CCUService.kiki.source.KikiSource;
 import org.zankio.cculife.SessionManager;
 import org.zankio.cculife.override.Net;
 import org.zankio.cculife.override.NetworkErrorException;
@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+
 import javax.net.ssl.HttpsURLConnection;
 
 public class Kiki {

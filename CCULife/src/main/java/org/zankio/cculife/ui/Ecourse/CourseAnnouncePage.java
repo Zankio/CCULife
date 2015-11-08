@@ -1,8 +1,8 @@
 package org.zankio.cculife.ui.Ecourse;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.text.Html;

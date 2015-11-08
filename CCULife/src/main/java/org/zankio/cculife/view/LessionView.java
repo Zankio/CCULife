@@ -1,4 +1,4 @@
-package org.zankio.cculife.View;
+package org.zankio.cculife.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;

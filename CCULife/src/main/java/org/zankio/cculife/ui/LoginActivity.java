@@ -16,10 +16,10 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
-import org.zankio.cculife.CCUService.portal.Portal;
 import org.zankio.cculife.CCUService.ecourse.source.EcourseLocalSource;
 import org.zankio.cculife.CCUService.ecourse.source.EcourseRemoteSource;
 import org.zankio.cculife.CCUService.kiki.source.KikiLocalSource;
+import org.zankio.cculife.CCUService.portal.Portal;
 import org.zankio.cculife.R;
 import org.zankio.cculife.SessionManager;
 import org.zankio.cculife.override.LoginErrorException;

@@ -3,11 +3,11 @@ package org.zankio.cculife.CCUService.kiki;
 
 import android.content.Context;
 
+import org.zankio.cculife.CCUService.base.SourceSwitcher.ISwitcher;
+import org.zankio.cculife.CCUService.base.SourceSwitcher.SingleSourceSwitcher;
 import org.zankio.cculife.CCUService.kiki.parser.ScoreQueryParser;
 import org.zankio.cculife.CCUService.kiki.source.ScoreQueryRemoteSource;
 import org.zankio.cculife.CCUService.kiki.source.ScoreQuerySource;
-import org.zankio.cculife.CCUService.base.SourceSwitcher.ISwitcher;
-import org.zankio.cculife.CCUService.base.SourceSwitcher.SingleSourceSwitcher;
 import org.zankio.cculife.SessionManager;
 
 

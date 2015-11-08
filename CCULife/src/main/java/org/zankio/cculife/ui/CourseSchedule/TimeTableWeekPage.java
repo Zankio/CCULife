@@ -9,9 +9,9 @@ import android.widget.TextView;
 
 import org.zankio.cculife.CCUService.kiki.Kiki;
 import org.zankio.cculife.R;
-import org.zankio.cculife.View.LessionView;
 import org.zankio.cculife.ui.Base.BasePage;
 import org.zankio.cculife.ui.Base.onDataLoadListener;
+import org.zankio.cculife.view.LessionView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
