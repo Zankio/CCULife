@@ -75,6 +75,11 @@
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
+            android:name="org.zankio.cculife.ui.UpdateUI"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppDialog">
+        </activity>
+        <activity
             android:name="org.zankio.cculife.ui.AboutActivity"
             android:label="@string/title_activity_about" >
             <intent-filter>
@@ -93,6 +98,10 @@
 
         <service
             android:name=".services.FileOpenService"
+            android:exported="false"
+            />
+        <service
+            android:name=".services.CheckUpdateService"
             android:exported="false" />
     </application>
 
