@@ -17,6 +17,7 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.zankio.cculife.services.DownloadService;
 import org.zankio.cculife.CCUService.ecourse.Ecourse;
 import org.zankio.cculife.R;
 import org.zankio.cculife.override.AsyncTaskWithErrorHanding;
@@ -72,22 +73,9 @@ public class CourseFilePage extends BasePage {
                         file = (Ecourse.File) parent.getExpandableListAdapter().getChild(groupPosition, childPosition);
                         assert file != null;
                         filename = file.Name != null ? file.Name : URLUtil.guessFileName(file.URL, null, null);
+                        DownloadService.downloadFile(inflater.getContext(), file.URL, filename);
 
-                        DownloadManager manager;
-                        DownloadManager.Request request;
-
-                        manager = (DownloadManager) inflater.getContext().getSystemService(Activity.DOWNLOAD_SERVICE);
-                        request = new DownloadManager.Request(Uri.parse(file.URL));
-                        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE | DownloadManager.Request.NETWORK_WIFI);
-                        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename);
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                        } else {
-                            request.setShowRunningNotification(true);
-                        }
                         Toast.makeText(inflater.getContext(), "下載 : " + filename, Toast.LENGTH_SHORT).show();
-                        manager.enqueue(request);
                         return false;
                     }
                 }

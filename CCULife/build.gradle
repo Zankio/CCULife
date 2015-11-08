@@ -30,4 +30,5 @@ dependencies {
     compile 'com.android.support:support-v4:22.2.0'
     compile 'org.jsoup:jsoup:1.7.2'
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    compile 'com.koushikdutta.ion:ion:2.1.6'
 }

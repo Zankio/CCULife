@@ -87,6 +87,13 @@
             android:name="org.zankio.cculife.ui.Ecourse.CourseClassmateActivity"
             android:label="@string/title_activity_course_classmate" >
         </activity>
+        <service
+            android:name=".services.DownloadService"
+            android:exported="false" />
+
+        <service
+            android:name=".services.FileOpenService"
+            android:exported="false" />
     </application>
 
 </manifest>
