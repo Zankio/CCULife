@@ -29,13 +29,14 @@ public class FileOpenService extends IntentService {
         mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         Bundle data = intent.getExtras();
+        String state = data.getString("state");
         String filename = data.getString("filename");
         String path = data.getString("path");
         int id = data.getInt("id");
         String TAG = data.getString("TAG");
 
         File file = new File(path, filename);
-        if (file.exists()) {
+        if (!"error".equals(state) && file.exists()) {
             String[] names = file.getName().split("\\.");
             String ext;
             if (names.length > 0)

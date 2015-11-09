@@ -70,7 +70,7 @@ public class DownloadService extends IntentService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
-            if (e.getMessage().equals("javax.net.ssl.SSLException")) {
+            if ("javax.net.ssl.SSLException".equals(e.getMessage())) {
                 editor.putInt("SSL_MODE", 2);
                 editor.commit();
                 return false;
