@@ -106,7 +106,6 @@ public class KikiParser extends BaseParser {
             if (classTeacherIndex >= 0) classTeacher = fields.get(classTeacherIndex).text();
             if (classTimeIndex >= 0) classTime = fields.get(classTimeIndex).text();
             classColor = randomColor();
-            classColorTotal++;
 
             /*Format example:
                 一G 三G
@@ -172,6 +171,7 @@ public class KikiParser extends BaseParser {
 
                 result.days[processingTime].classList.add(mClass);
             }
+            classColorTotal++;
         }
         result.sort();
         return result;

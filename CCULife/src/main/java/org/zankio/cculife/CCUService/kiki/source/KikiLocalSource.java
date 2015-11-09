@@ -99,6 +99,9 @@ public class KikiLocalSource extends KikiSource {
         for (int i = 0; i < colors.length; i++) colors[i] = -1;
         while (!cursor.isAfterLast()) {
             mClass = cursorToClass(cursor, result);
+            if (mClass.colorid >= colors.length)
+                mClass.colorid = colors.length - 1;
+
             if (colors.length <= mClass.colorid || colors[mClass.colorid] < 0)
                 colors[mClass.colorid] = randomColor();
             mClass.color = colors[mClass.colorid];
