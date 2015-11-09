@@ -123,23 +123,16 @@ public class LoginWifi {
       NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
       PendingIntent contentIntent = PendingIntent.getActivity(context, 0, new Intent(), 0);
       Resources resources = context.getResources();
-      if(result.equals(true)) {
-        Notification n = new Notification.Builder(context)
-          .setContentTitle(resources.getString(R.string.app_name))
-          .setContentText(resources.getString(R.string.wifi_login_success))
-          .setSmallIcon(R.drawable.ic_launcher)
-          .setContentIntent(contentIntent)
-          .getNotification();
-        nm.notify("CCULife_Wifi_Auto_Login", 1, n);
-      } else {
-        Notification n = new Notification.Builder(context)
-          .setContentTitle(resources.getString(R.string.app_name))
-          .setContentText(resources.getString(R.string.wifi_login_check_pw))
-          .setSmallIcon(R.drawable.ic_launcher)
-          .setContentIntent(contentIntent)
-          .getNotification();
-        nm.notify("CCULife_Wifi_Auto_Login", 1, n);
-      }
+      int notify_msg_id = login_result.equals(true) ?
+        R.string.wifi_login_success :
+        R.string.wifi_login_check_pw;
+      Notification n = new Notification.Builder(context)
+        .setContentTitle(resources.getString(R.string.app_name))
+        .setContentText(resources.getString(notify_msg_id))
+        .setSmallIcon(R.drawable.ic_launcher)
+        .setContentIntent(contentIntent)
+        .getNotification();
+      nm.notify("CCULife_Wifi_Auto_Login", 1, n);
     }
   }
 }
