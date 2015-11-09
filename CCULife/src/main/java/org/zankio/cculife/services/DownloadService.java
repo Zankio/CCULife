@@ -6,9 +6,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 
 import com.koushikdutta.async.future.FutureCallback;
@@ -29,13 +32,17 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLException;
+import javax.net.ssl.SSLHandshakeException;
 import javax.net.ssl.TrustManagerFactory;
 
 public class DownloadService extends IntentService {
     public enum State { Downloading, Finished, Error};
-    private static String TAG = "DownloadService";
+    private final static String TAG = "DownloadService";
+    private final static String SSL_TEST_URL = "https://ecourse.ccu.edu.tw/robots.txt";
     static ArrayList<Integer> notifyID = new ArrayList<Integer>();
     static TrustManagerFactory tmf;
     static int total = 0;
@@ -46,6 +53,31 @@ public class DownloadService extends IntentService {
 
     public void onCreate() {
         super.onCreate();
+    }
+
+    public boolean checkSSL() {
+        SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preference.edit();
+
+        int mode = preference.getInt("SSL_MODE", 0);
+        if (mode == 1) return true;
+        else if (mode == 2) return false;
+        try {
+            Ion.with(this).load(SSL_TEST_URL).asString().get();
+            editor.putInt("SSL_MODE", 1);
+            editor.commit();
+            return false;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            if (e.getMessage().equals("javax.net.ssl.SSLException")) {
+                editor.putInt("SSL_MODE", 2);
+                editor.commit();
+                return false;
+            }
+            e.printStackTrace();
+        }
+        return true;
     }
 
     public static void downloadFile(Context context, String url, String filename) {
@@ -118,13 +150,15 @@ public class DownloadService extends IntentService {
                 .setCallback(new FutureCallback<File>() {
                     @Override
                     public void onCompleted(Exception e, File file) {
-                        if (e != null)
+                        if (e != null) {
+                            e.printStackTrace();
                             DownloadService.notify(DownloadService.this, mNotifyManager, mBuilder, currentId, State.Error, notifyErrorIntent);
-                        else
+                        } else
                             DownloadService.notify(DownloadService.this, mNotifyManager, mBuilder, currentId, State.Finished, notifyFinishIntent);
                     }
                 }).get();
         } catch (Exception e) {
+            e.printStackTrace();
             DownloadService.notify(this, mNotifyManager, mBuilder, currentId, State.Error, notifyErrorIntent);
         }
     }
@@ -155,6 +189,7 @@ public class DownloadService extends IntentService {
         builder.setProgress(0, 0, false);
         builder.setOngoing(false);
         if (pendingIntent != null) builder.setContentIntent(pendingIntent);
+        mNotifyManager.cancel(TAG, id);
         mNotifyManager.notify(TAG, id, builder.build());
         notifyID.remove(Integer.valueOf(id));
     }
@@ -196,8 +231,9 @@ public class DownloadService extends IntentService {
             // Create an SSLContext that uses our TrustManager
             SSLContext ssl_context = SSLContext.getInstance("TLS");
             ssl_context.init(null, tmf.getTrustManagers(), null);
+
             Ion.getDefault(this).getHttpClient().getSSLSocketMiddleware().setTrustManagers(tmf.getTrustManagers());
-            Ion.getDefault(this).getHttpClient().getSSLSocketMiddleware().setSSLContext(ssl_context);
+            if(!checkSSL()) Ion.getDefault(this).getHttpClient().getSSLSocketMiddleware().setSSLContext(ssl_context);
 
 
         } catch (CertificateException ignored) {
