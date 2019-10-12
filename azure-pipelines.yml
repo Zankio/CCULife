@@ -4,17 +4,28 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/android
 
 trigger:
-- master
+- azure-pipelines
 
 pool:
   vmImage: 'macos-latest'
 
 steps:
+- task: DownloadSecureFile@1
+  name: googleService
+  inputs:
+    secureFile: 'google-services.json'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Agent.TempDirectory)'
+    Contents: 'google-services.json'
+    TargetFolder: '$(Build.SourcesDirectory)/CCULife'
+    
 - task: Gradle@2
   inputs:
     workingDirectory: ''
     gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
+    gradleOptions: '-Xmx4096m -XX:+HeapDumpOnOutOfMemoryError '
     publishJUnitResults: false
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'assembleDebug'
